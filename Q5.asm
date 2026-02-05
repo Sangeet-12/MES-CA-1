@@ -1,0 +1,30 @@
+ORG 0000H
+
+MOV R0, #40H        
+MOV R1, #40H        
+
+NEXT_BYTE:
+MOV A, @R0          
+CJNE A, #0FFH, SAVE_IT  
+SJMP SKIP_FF       
+
+SAVE_IT:
+MOV @R1, A          
+INC R1             
+
+SKIP_FF:
+INC R0             
+CJNE R0, #60H, NEXT_BYTE
+
+CLEAR_REST:        
+CJNE R1, #60H, PUT_ZERO
+SJMP END_PROG
+
+PUT_ZERO:
+MOV @R1, #00H
+INC R1
+SJMP CLEAR_REST
+
+END_PROG:
+SJMP END_PROG
+END
