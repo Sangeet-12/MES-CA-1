@@ -1,0 +1,13 @@
+ORG 0000H
+
+MOV A, #10H
+ADD A, #22H
+MOV R1, A      
+
+MOV A, #30H
+XRL A, #03H    
+; Last digit = 3233
+
+HERE:
+SJMP HERE
+END
